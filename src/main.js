@@ -1,13 +1,19 @@
-import BtnGroup from './components/BtnGroup';
-
 import { ZhihuHandler } from './handlers/zhihu';
+
+import BtnGroup from './components/BtnGroup';
+import Paper from './components/Paper';
 
 import './main.less';
 
 async function main() {
-  let handler = null;
+  window.$web2pdf = {};
+
+  const $paper = Paper();
+  document.body.appendChild($paper);
+  window.$web2pdf.$paper = $paper;
 
   const { hostname } = location;
+  let handler = null;
   if (hostname.endsWith('zhihu.com')) {
     handler = new ZhihuHandler(hostname);
   }
@@ -15,11 +21,9 @@ async function main() {
   if (handler !== null) {
     const actions = {
       print: () => {
-        alert('print!');
         handler.print();
       },
     };
-
     document.body.appendChild(BtnGroup(actions));
   } else {
     throw new Error('No matched handler!');
