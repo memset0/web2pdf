@@ -5,10 +5,7 @@ export class ZhihuHandler extends Handler {
   async crawl($paper) {
     let html = '';
 
-    let title = document.title;
-    if (title.endsWith(' - 知乎')) {
-      title = title.slice(0, -5).trim();
-    }
+    let title = document.querySelector('.Post-Header .Post-Title')?.innerText?.trim();
 
     let time = document.querySelector('.ContentItem-time')?.innerText?.trim();
     time = time
@@ -20,7 +17,7 @@ export class ZhihuHandler extends Handler {
     const $authorAvatar = document.querySelector('.AuthorInfo-avatarWrapper img.Avatar.AuthorInfo-avatar');
 
     const pageProps = {
-      title,
+      title: title || null,
       updateTime: time || null,
       websiteLogo: 'https://static.zhihu.com/heifetz/favicon.ico',
       author: $author?.innerText?.trim() || null,
@@ -46,8 +43,8 @@ export class ZhihuHandler extends Handler {
     });
 
     // 渲染数学公式
-    const MathJax = window.MathJax; // version: 2.7.9
-    if (MathJax && MathJax.Hub) {
+    if (unsafeWindow.MathJax && unsafeWindow.MathJax.Hub) {
+      const MathJax = unsafeWindow.MathJax; // version: 2.7.9
       const waitForMathJax = () =>
         new Promise(function (resolve, reject) {
           // 这是一个等待所有MathJax队列内的公式渲染完成的Promise
@@ -63,6 +60,8 @@ export class ZhihuHandler extends Handler {
         MathJax.Hub.Queue(['Typeset', MathJax.Hub, $math]);
       });
       await waitForMathJax();
+    } else {
+      console.log('MathJax not discovered!', unsafeWindow.MathJax);
     }
 
     return pageProps;

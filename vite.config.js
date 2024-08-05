@@ -25,6 +25,10 @@ export default defineConfig({
             `https://${hostname}/*`,
           ])
           .flat(),
+        grant: [
+          'GM_addStyle', //
+          'unsafeWindow',
+        ],
       },
       build: {
         externalGlobals: {},
