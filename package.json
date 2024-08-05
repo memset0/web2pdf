@@ -1,0 +1,34 @@
+{
+  "name": "web2pdf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main.js",
+  "license": "GPL-3.0-only",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && mv dist/web2pdf.js.user.js dist/web2pdf.js"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/memset0/web2pdf.git"
+  },
+  "keywords": [],
+  "author": "memset0",
+  "bugs": {
+    "url": "https://github.com/memset0/web2pdf/issues"
+  },
+  "homepage": "https://github.com/memset0/web2pdf#readme",
+  "dependencies": {
+    "@types/node": "^22.1.0",
+    "file-saver": "^2.0.5",
+    "h": "^1.0.0",
+    "less": "^4.1.3",
+    "query-string": "^9.1.0",
+    "vite": "^5.3.5",
+    "yaml": "^2.3.1"
+  },
+  "devDependencies": {
+    "vite-plugin-monkey": "^4.0.6"
+  }
+}
