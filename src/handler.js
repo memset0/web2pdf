@@ -1,8 +1,8 @@
 import { printToPdf } from './utils/print';
 
 export class Handler {
-  print() {
-    this.crawl();
+  async print() {
+    await this.crawl(this.$paper);
     printToPdf();
   }
 

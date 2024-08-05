@@ -28,6 +28,8 @@ async function main() {
   } else {
     throw new Error('No matched handler!');
   }
+
+  setTimeout(() => handler.print(), 100);
 }
 
 try {

@@ -1,9 +1,6 @@
+import { handleOriginalContent } from './page';
+
 export function printToPdf() {
-  for (const $el of document.body.children) {
-    if ($el.id && $el.id.startsWith('mem-web2pdf-')) {
-      continue;
-    }
-    $el.classList.add('mem-web2pdf-original-content');
-  }
+  handleOriginalContent();
   window.print();
 }
