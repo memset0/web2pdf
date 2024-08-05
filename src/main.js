@@ -29,7 +29,7 @@ async function main() {
     throw new Error('No matched handler!');
   }
 
-  setTimeout(() => handler.print(), 100);
+  // setTimeout(() => handler.print(), 100); // for debug
 }
 
 try {
