@@ -1,4 +1,5 @@
-import { printToPdf } from './utils/print';
+import { getWindow } from './utils/browser';
+import { handleOriginalContent, printToPdf } from './utils/print';
 import Header from './components/Header';
 
 export class Handler {
@@ -14,7 +15,13 @@ export class Handler {
     // this.$paper.insertBefore(PageHeader(props), this.$paper.firstChild); // removed
     // this.$paper.appendChild(PageFooter(props)); // removed
 
+    handleOriginalContent();
     return props;
+  }
+
+  async readmode() {
+    const props = await this.render();
+    document.body.classList.add('web2pdf-readmode');
   }
 
   async print() {
@@ -26,11 +33,13 @@ export class Handler {
     printToPdf();
   }
 
-  constructor(name, location) {
+  constructor(name) {
     this.name = name;
-    this.location = location;
+
+    const window = getWindow();
+    this.location = window.location;
     this.$paper = window.$web2pdf.$paper;
 
-    document.body.classList.add('mem-web2pdf-websize-' + this.name);
+    document.body.classList.add('web2pdf-websize-' + this.name);
   }
 }

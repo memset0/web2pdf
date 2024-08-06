@@ -1,7 +1,9 @@
-import { removeBySelector } from '../utils/dom';
 import { Handler } from '../handler';
+import { removeBySelector } from '../utils/dom';
 
-export class ZhihuHandler extends Handler {
+import './zhihu.less';
+
+export default class ZhihuHandler extends Handler {
   async crawl($paper) {
     let html = '';
 
@@ -67,7 +69,7 @@ export class ZhihuHandler extends Handler {
     return pageProps;
   }
 
-  constructor(location) {
-    super('zhihu', location);
+  constructor() {
+    super('zhihu');
   }
 }

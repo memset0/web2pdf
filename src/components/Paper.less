@@ -1,25 +1,10 @@
-.mem-web2pdf-content {
-  p,
-  figure {
-    margin: 1em 0;
-  }
-  .mem-web2pdf-website-zhihu & {
-    p.ztext-empty-paragraph {
-      margin: 1em 0;
-      height: 0.2em;
-    }
-  }
-  img {
-    max-width: 90%;
-  }
-}
+@import '../variables.less';
 
-.mem-web2pdf-paper {
-  width: 800px;
+.web2pdf-paper {
+  .__web2pdf-content() !important;
+
+  width: @content-width;
   background: white;
-
-  font-size: 16px;
-  line-height: 18px;
 
   // display: none;
   @media print {
@@ -30,8 +15,6 @@
     text-shadow: none !important;
     -webkit-text-stroke: unset !important;
   }
-
-  .mem-web2pdf-content() !important;
 }
 
 @media print {

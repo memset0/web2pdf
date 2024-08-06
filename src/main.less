@@ -1,9 +1,17 @@
-.mem-web2pdf-original-content {
-  @media print {
-    display: none;
-  }
+@import 'variables.less';
 
-  .mem-web2pdf-readmode & {
+._web2pdf-print-body {
+  // 重写body规则样式
+  background: white;
+  color: black;
+  tab-size: 4;
+  overflow-x: hidden;
+  width: @content-width;
+  min-width: @content-width;
+  min-height: 10em;
+  .__web2pdf-font-style(); // 覆盖统一字体样式
+
+  .web2pdf-original-content {
     display: none;
   }
 }
@@ -13,4 +21,12 @@
     size: A4;
     margin: 1cm;
   }
+
+  body {
+    ._web2pdf-print-body() !important;
+  }
+}
+
+body.web2pdf-readmode {
+  ._web2pdf-print-body() !important;
 }

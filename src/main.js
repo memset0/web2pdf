@@ -1,11 +1,13 @@
-import { ZhihuHandler } from './handlers/zhihu';
-
+import { getWindow } from './utils/browser';
+import ZhihuHandler from './handlers/zhihu';
+import CsdnHandler from './handlers/csdn';
 import BtnGroup from './components/BtnGroup';
 import Paper from './components/Paper';
 
 import './main.less';
 
 async function main() {
+  const window = getWindow();
   window.$web2pdf = {};
 
   const $paper = Paper();
@@ -15,11 +17,16 @@ async function main() {
   const { hostname } = location;
   let handler = null;
   if (hostname.endsWith('zhihu.com')) {
-    handler = new ZhihuHandler(hostname);
+    handler = new ZhihuHandler();
+  } else if (hostname.endsWith('csdn.net')) {
+    handler = new CsdnHandler();
   }
 
   if (handler !== null) {
     const actions = {
+      readmode: () => {
+        handler.readmode();
+      },
       print: () => {
         handler.print();
       },
@@ -35,5 +42,5 @@ async function main() {
 try {
   main();
 } catch (err) {
-  console.error('[mem-web2pdf]', err);
+  console.error('[web2pdf]', err);
 }

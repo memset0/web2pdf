@@ -1,3 +1,7 @@
+export function removeChineseCharacters(string) {
+  return string.replace(/[\u4e00-\u9fa5]/g, '');
+}
+
 export function removeBySelector(element, selector) {
   const elements = Array.from(element.querySelectorAll(selector));
 

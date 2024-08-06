@@ -1,0 +1,18 @@
+@import '../variables.less';
+
+.web2pdf-websize-csdn {
+  .markdown_views {
+    // 应用全局统一字体样式
+    .__web2pdf-font-style() !important;
+  }
+
+  .markdown_views a:visited {
+    // 让点过的链接的颜色和没点过的链接颜色看起来一样
+    color: #4ea1db !important;
+  }
+
+  .markdown_views img {
+    // 让行间图片和文本的间距不会太大
+    margin: 1em 0;
+  }
+}
