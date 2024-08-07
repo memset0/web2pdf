@@ -1,5 +1,6 @@
 import { Handler } from '../handler';
 import { removeBySelector } from '../utils/dom';
+import { getWindow } from '../utils/browser';
 
 import './zhihu.less';
 
@@ -45,8 +46,9 @@ export default class ZhihuHandler extends Handler {
     });
 
     // 渲染数学公式
-    if (unsafeWindow.MathJax && unsafeWindow.MathJax.Hub) {
-      const MathJax = unsafeWindow.MathJax; // version: 2.7.9
+    const window = getWindow();
+    if (window.MathJax && window.MathJax.Hub) {
+      const MathJax = window.MathJax; // version: 2.7.9
       const waitForMathJax = () =>
         new Promise(function (resolve, reject) {
           // 这是一个等待所有MathJax队列内的公式渲染完成的Promise
@@ -63,7 +65,7 @@ export default class ZhihuHandler extends Handler {
       });
       await waitForMathJax();
     } else {
-      console.log('MathJax not discovered!', unsafeWindow.MathJax);
+      console.log('MathJax not discovered!', window.MathJax);
     }
 
     return pageProps;
